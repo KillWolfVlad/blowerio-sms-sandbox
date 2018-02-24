@@ -1,0 +1,42 @@
+# blowerio-sms-sandbox
+# Sandbox for Blower.io SMS
+#
+# Copyright (C) 2018  https://github.com/KillWolfVlad
+#
+# This file is part of blowerio-sms-sandbox.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+language: node_js
+node_js: '9.6.1'
+os: linux
+dist: trusty
+sudo: required
+
+services:
+- docker
+
+env:
+- NODE_ENV=staging BODYPARSER_LIMIT=100kb DATABASE_URL=postgresql://postgres@localhost:5432/postgres DATABASE_MAX=10
+- NODE_ENV=production BODYPARSER_LIMIT=100kb DATABASE_URL=postgresql://postgres@localhost:5432/postgres DATABASE_MAX=10
+
+before_install:
+# https://github.com/travis-ci/travis-ci/issues/4842#issuecomment-311527059
+- sudo service postgresql stop
+- while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
+# Install postgresql from Docker
+- docker pull postgres:10.2
+- docker run -d -p 5432:5432 --name blowerio postgres:10.2
+
+script: yarn test

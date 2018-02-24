@@ -1,0 +1,87 @@
+<!--
+
+blowerio-sms-sandbox
+Sandbox for Blower.io SMS
+
+Copyright (C) 2018  https://github.com/KillWolfVlad
+
+This file is part of blowerio-sms-sandbox.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sandbox for Blower.io SMS</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #80a550;" id="app">
+    <a class="navbar-brand" href="/">
+        <img src="/brand.png" width="30" height="30" class="d-inline-block align-top"
+             alt="">
+        <s>blower.io</s> Sandbox
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a v-on:click="erase" class="nav-link" href="#">
+                    <i class="fas fa-eraser"></i> Erase DB
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/KillWolfVlad/blowerio-sms-sandbox" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="submit">
+            <input class="form-control mr-sm-2" type="tel" placeholder="+79123456789" v-model="to" required>
+            <input class="form-control mr-sm-2" type="text" placeholder="Message" v-model="message" required>
+            <button class="btn btn-light my-2 my-sm-0" type="submit">
+                <i class="fas fa-paper-plane"></i> Send
+            </button>
+        </form>
+    </div>
+</nav>
+<main class="container">
+    <div style="padding-top: 15px;" id="messages"></div>
+</main>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="/app.js"></script>
+</body>
+</html>
